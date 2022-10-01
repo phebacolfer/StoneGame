@@ -1,0 +1,38 @@
+class Solution {
+    public boolean stoneGame(int[] piles) {
+        int length = piles.length;
+        int alSum = 0;
+        int bobSum = 0;
+        boolean roundCounter = false;
+        while (length>=0){
+            int[] newArray = piles;
+            int count = 0;
+            roundCounter = !roundCounter;
+            int curPick = piles[0];
+            for (int i=0; i<length-1; i++){
+                count++;
+                curPick = piles[0];
+                if (newArray[i]>curPick){
+                    curPick = piles[i];
+                }
+                else{
+                    newArray[count] = piles[i];
+                }
+            }
+            piles = newArray;
+            length--;
+            if (roundCounter){
+                alSum += curPick;
+            }
+            else{
+                bobSum += curPick;
+            }
+        }
+        if (alSum>bobSum){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+}
